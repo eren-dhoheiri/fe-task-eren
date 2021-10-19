@@ -1,7 +1,12 @@
+import { Footer, Navbar, Main } from "./components";
+import "./index.scss";
+
 function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <Navbar />
+      <Main />
+      <Footer />
     </div>
   );
 }

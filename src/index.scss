@@ -1,0 +1,93 @@
+$main-color: #72ccb4;
+$font-color: #444444;
+
+@media only screen and (max-width: 576px) {
+  .container {
+    width: 95%;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (min-width: 576px) {
+  .container {
+    width: 540;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    width: 720px;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .container {
+    width: 960px;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    width: 1140px;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .container {
+    width: 1320px;
+    margin: 0 auto;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $font-color;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+header {
+  background-color: $main-color;
+  color: #ffffff;
+}
+
+footer {
+  background-color: $main-color;
+  color: #ffffff;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+  font-size: 14px;
+  text-align: center;
+
+  a {
+    color: #ffffff;
+  }
+}
+
+.App {
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container-main {
+  flex: 1;
+  margin: auto 60px;
+}
+
+.logo {
+  height: 10vh;
+}
