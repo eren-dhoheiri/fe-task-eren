@@ -1,8 +1,8 @@
 const convertToIdr = (price) => {
-  if (price) {
-    return `Rp ${price.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
-  }
-  return "-";
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  }).format(price);
 };
 
 const formatDate = (parsedDate) => {

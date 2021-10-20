@@ -17,19 +17,28 @@ const MainTable = ({
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
               <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                <div>
-                  {column.render("Header")}
-                  <span>
-                    {column.isSorted ? (
-                      column.isSortedDesc ? (
-                        <BsFillCaretUpFill />
+                <div className="table-head-wrapper">
+                  <div className="table-header">
+                    {column.render("Header")}
+                    <span>
+                      {column.isSorted ? (
+                        column.isSortedDesc ? (
+                          <BsFillCaretDownFill />
+                        ) : (
+                          <BsFillCaretUpFill />
+                        )
                       ) : (
-                        <BsFillCaretDownFill />
-                      )
+                        <FaSort />
+                      )}
+                    </span>
+                  </div>
+                  <div className="table-filter">
+                    {column.canFilter ? (
+                      column.render("Filter")
                     ) : (
-                      <FaSort />
+                      <div className="helper-block"></div>
                     )}
-                  </span>
+                  </div>
                 </div>
               </th>
             ))}
@@ -54,7 +63,7 @@ const MainTable = ({
           <tr className="img-container my-10 md:my-20">
             <td colSpan="5" className="py-8">
               <div className="text-base font-light text-gray-400 mt-4 text-center">
-                Oops! No Data Found.
+                Oops! Data yang Anda cari belum ada...
               </div>
             </td>
           </tr>

@@ -1,11 +1,20 @@
 import React, { useState, useMemo, useEffect } from "react";
 import {
   useTable,
+  useFilters,
   useGlobalFilter,
   useSortBy,
   usePagination,
 } from "react-table";
-import { MainTable, Pagination, CustomSearch, Loading } from "../components";
+import {
+  MainTable,
+  Pagination,
+  CustomSearch,
+  Loading,
+  DataShow,
+  FilterTable,
+  FilterNumber,
+} from "../components";
 import { convertToIdr, formatDate } from "../utils/helper";
 import { connect } from "react-redux";
 import { getListProduct } from "../redux/actions";
@@ -19,11 +28,7 @@ const Main = ({ isLoading, listProduct, getListProduct }) => {
 
   useEffect(() => {
     listProduct !== undefined &&
-      setDataList(
-        listProduct.filter(
-          (item) => item.uuid !== null && item.komoditas !== null
-        )
-      );
+      setDataList(listProduct.filter((item) => item.komoditas !== null));
   }, [listProduct]);
 
   const data = useMemo(() => dataList, [dataList]);
@@ -32,36 +37,51 @@ const Main = ({ isLoading, listProduct, getListProduct }) => {
       {
         Header: "No",
         accessor: (product, d) => d + 1,
+        Filter: FilterTable,
+        disableFilters: true,
       },
       {
         Header: "Komoditas",
         accessor: "komoditas",
+        Filter: FilterTable,
       },
       {
         Header: "Harga",
-        accessor: (d) => convertToIdr(d.price),
+        accessor: "price",
+        Cell: (item) => convertToIdr(item.value),
+        Filter: FilterTable,
       },
       {
         Header: "Ukuran",
         accessor: "size",
+        Cell: (item) => Number(item.value),
+        Filter: FilterTable,
       },
       {
         Header: "Kota/Kab",
         accessor: "area_kota",
+        Filter: FilterTable,
       },
       {
         Header: "Provinsi",
         accessor: "area_provinsi",
+        Filter: FilterTable,
       },
       {
         Header: "Tanggal",
         accessor: (d) => formatDate(d.tgl_parsed),
+        Filter: FilterTable,
+        disableFilters: true,
       },
     ],
     []
   );
   const tableInstance = useTable(
-    { columns, data },
+    {
+      columns,
+      data,
+    },
+    useFilters,
     useGlobalFilter,
     useSortBy,
     usePagination
@@ -80,8 +100,9 @@ const Main = ({ isLoading, listProduct, getListProduct }) => {
     gotoPage,
     setGlobalFilter,
     prepareRow,
+    setPageSize,
   } = tableInstance;
-  const { pageIndex, globalFilter } = state;
+  const { pageIndex, globalFilter, pageSize } = state;
 
   return (
     <div className="container main">
@@ -89,10 +110,11 @@ const Main = ({ isLoading, listProduct, getListProduct }) => {
         <h2>Daftar Produk eFishery</h2>
       </div>
       <div className="searchbar-container">
-        <CustomSearch
+        {/* <CustomSearch
           globalFilter={globalFilter}
           setGlobalFilter={setGlobalFilter}
-        />
+        /> */}
+        <DataShow pageSize={pageSize} setPageSize={setPageSize} />
       </div>
       <div className="table-container">
         {isLoading ? (

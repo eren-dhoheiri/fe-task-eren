@@ -153,6 +153,18 @@ button {
         }
       }
     }
+
+    .datashow-container {
+      display: flex;
+      justify-content: end;
+
+      .select-btn {
+        border: 1px solid $main-color;
+        border-radius: 10px;
+        padding: 8px;
+        background-color: #ffff;
+      }
+    }
   }
 }
 
@@ -163,7 +175,36 @@ button {
   -moz-box-shadow: $shadow;
   padding: 20px 30px;
   background-color: #ffffff;
-  border-radius: 5px;
+  border-radius: 15px;
+
+  .table-head-wrapper {
+    // background-color: #ff4949;
+    height: 70px;
+    .table-filter {
+      // background-color: yellow;
+      align-self: flex-start;
+      height: 30px;
+      margin-bottom: 25px;
+
+      .filter-option {
+        background-color: #ffff;
+        border: 1px solid $main-color;
+        padding: 5px;
+        border-radius: 5px;
+      }
+
+      .helper-block {
+        height: 30px;
+        // background-color: #72ccb4;
+      }
+    }
+
+    .table-header {
+      // background-color: green;
+      align-self: flex-end;
+      margin-bottom: 20px;
+    }
+  }
 
   table {
     width: 100%;
@@ -179,9 +220,6 @@ button {
       }
 
       div {
-        display: flex;
-        align-items: center;
-
         span {
           margin-left: 3px;
           color: $main-color;
@@ -195,9 +233,10 @@ button {
         color: #fafafa;
         font-weight: 600;
         border-radius: 8px;
+        background-clip: border-box;
       }
       td {
-        padding: 25px 0px;
+        padding: 25px 5px;
         font-size: 15px;
       }
     }
