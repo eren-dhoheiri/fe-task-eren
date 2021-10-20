@@ -107,16 +107,16 @@ const Main = ({ isLoading, listProduct, getListProduct }) => {
   return (
     <div className="container main">
       <div className="title-container">
-        <h2>Daftar Produk eFishery</h2>
+        <h2>Data Produk Pembudidaya Indonesia</h2>
       </div>
       <div className="searchbar-container">
-        {/* <CustomSearch
+        <CustomSearch
           globalFilter={globalFilter}
           setGlobalFilter={setGlobalFilter}
-        /> */}
-        <DataShow pageSize={pageSize} setPageSize={setPageSize} />
+        />
       </div>
       <div className="table-container">
+        <DataShow pageSize={pageSize} setPageSize={setPageSize} />
         {isLoading ? (
           <Loading />
         ) : (

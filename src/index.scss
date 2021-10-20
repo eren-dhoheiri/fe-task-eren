@@ -48,7 +48,7 @@ $red-color: #ff4949;
 
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Asap", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $font-color;
@@ -71,7 +71,7 @@ footer {
   display: flex;
   align-items: center;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
 
   button {
@@ -79,7 +79,7 @@ footer {
     border-radius: 7px;
     padding: 10px 20px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
   }
 
@@ -93,7 +93,7 @@ button {
   border-radius: 7px;
   padding: 10px 20px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: #ffffff;
   height: 17px;
@@ -129,6 +129,9 @@ button {
   .title-container {
     display: flex;
     justify-content: center;
+    h2 {
+      font-size: 28px;
+    }
   }
 
   .searchbar-container {
@@ -141,28 +144,18 @@ button {
       border-radius: 5px;
       padding: 10px 15px;
       box-shadow: $shadow;
+      width: 50%;
+      margin: 10px auto 30px;
       -webkit-box-shadow: $shadow;
       -moz-box-shadow: $shadow;
 
       .searchbar-input {
         border: none;
-        font-size: 16px;
+        font-size: 17px;
 
         &:focus {
           outline: none;
         }
-      }
-    }
-
-    .datashow-container {
-      display: flex;
-      justify-content: end;
-
-      .select-btn {
-        border: 1px solid $main-color;
-        border-radius: 10px;
-        padding: 8px;
-        background-color: #ffff;
       }
     }
   }
@@ -177,11 +170,27 @@ button {
   background-color: #ffffff;
   border-radius: 15px;
 
+  .datashow-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 16px;
+
+    .select-btn {
+      border: 1px solid $main-color;
+      border-radius: 10px;
+      padding: 8px;
+      margin-left: 5px;
+      background-color: #ffff;
+    }
+  }
+
   .table-head-wrapper {
-    // background-color: #ff4949;
     height: 70px;
+    margin: 0 3px;
+
     .table-filter {
-      // background-color: yellow;
       align-self: flex-start;
       height: 30px;
       margin-bottom: 25px;
@@ -195,12 +204,11 @@ button {
 
       .helper-block {
         height: 30px;
-        // background-color: #72ccb4;
       }
     }
 
     .table-header {
-      // background-color: green;
+      display: flex;
       align-self: flex-end;
       margin-bottom: 20px;
     }
@@ -212,7 +220,7 @@ button {
 
     th {
       padding: 12px 0;
-      font-size: 18px;
+      font-size: 20px;
       text-align: left;
 
       &:hover {
@@ -237,7 +245,7 @@ button {
       }
       td {
         padding: 25px 5px;
-        font-size: 15px;
+        font-size: 16px;
       }
     }
   }
