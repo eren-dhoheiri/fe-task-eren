@@ -5,7 +5,8 @@ import {
   useSortBy,
   usePagination,
 } from "react-table";
-import { MainTable, Pagination, CustomSearch } from "./Table";
+import { MainTable, Pagination, CustomSearch } from "../components";
+import { toCurrency, toDateFormat } from "../utils/helper";
 
 const Main = () => {
   const [dataList, setDataList] = useState([
@@ -150,7 +151,7 @@ const Main = () => {
       },
       {
         Header: "Harga",
-        accessor: "price",
+        accessor: (d) => toCurrency(d.price),
       },
       {
         Header: "Ukuran",
@@ -166,7 +167,7 @@ const Main = () => {
       },
       {
         Header: "Tanggal",
-        accessor: "tgl_parsed",
+        accessor: (d) => toDateFormat(d.tgl_parsed),
       },
     ],
     []

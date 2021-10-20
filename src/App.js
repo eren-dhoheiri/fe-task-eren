@@ -1,4 +1,5 @@
-import { Footer, Navbar, Main } from "./components";
+import { Footer, Navbar } from "./components";
+import { Main } from "./pages";
 import "./index.scss";
 
 function App() {
