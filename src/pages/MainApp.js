@@ -13,17 +13,19 @@ import {
   Loading,
   DataShow,
   FilterTable,
-  FilterNumber,
+  CreateProductModal,
 } from "../components";
 import { convertToIdr, formatDate } from "../utils/helper";
 import { connect } from "react-redux";
 import { getListProduct } from "../redux/actions";
 
-const Main = ({ isLoading, listProduct, getListProduct }) => {
+const MainApp = ({ isLoading, listProduct, getListProduct }) => {
   const [dataList, setDataList] = useState([]);
+  const [openCreateModal, setOpenCreateModal] = useState(false);
 
   useEffect(() => {
     getListProduct();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -116,11 +118,19 @@ const Main = ({ isLoading, listProduct, getListProduct }) => {
         />
       </div>
       <div className="table-container">
-        <DataShow pageSize={pageSize} setPageSize={setPageSize} />
         {isLoading ? (
           <Loading />
         ) : (
           <>
+            <div className="table-top">
+              <DataShow pageSize={pageSize} setPageSize={setPageSize} />
+              <button
+                className="add-btn"
+                onClick={() => setOpenCreateModal(true)}
+              >
+                Tambah Produk
+              </button>
+            </div>
             <MainTable
               getTableBodyProps={getTableBodyProps}
               getTableProps={getTableProps}
@@ -141,6 +151,10 @@ const Main = ({ isLoading, listProduct, getListProduct }) => {
           </>
         )}
       </div>
+      <CreateProductModal
+        openCreateModal={openCreateModal}
+        setOpenCreateModal={setOpenCreateModal}
+      />
     </div>
   );
 };
@@ -158,4 +172,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(MainApp);

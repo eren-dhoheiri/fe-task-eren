@@ -1,3 +1,3 @@
-import Main from "./Main";
+import MainApp from "./MainApp";
 
-export { Main };
+export { MainApp };

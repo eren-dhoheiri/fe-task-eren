@@ -1,4 +1,3 @@
-import { filterProduct } from "../utils/helper";
 import {
   GET_PRODUCT_REQUEST,
   GET_PRODUCT_SUCCESS,

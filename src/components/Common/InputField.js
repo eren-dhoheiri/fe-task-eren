@@ -2,7 +2,7 @@ import React from "react";
 
 const InputField = ({ label, type, placeholder, value, name, onChange }) => {
   return (
-    <div className="input-field">
+    <div className="input-option">
       <label>{label}</label>
       <input
         type={type}

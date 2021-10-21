@@ -3,10 +3,11 @@ import Footer from "./Common/Footer";
 import MainTable from "./Table/MainTable";
 import Pagination from "./Table/Pagination";
 import FilterTable from "./Table/FilterTable";
-import FilterNumber from "./Table/FilterNumber";
 import CustomSearch from "./Common/CustomSearch";
 import DataShow from "./Common/DataShow";
 import Loading from "./Common/Loading";
+import InputField from "./Common/InputField";
+import CreateProductModal from "./Modal/CreateProductModal";
 
 export {
   Navbar,
@@ -17,5 +18,6 @@ export {
   Loading,
   DataShow,
   FilterTable,
-  FilterNumber,
+  InputField,
+  CreateProductModal,
 };
