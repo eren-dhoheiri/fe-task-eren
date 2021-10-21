@@ -146,7 +146,7 @@ const editProductSuccess = () => {
   return { type: UPDATE_PRODUCT_SUCCESS };
 };
 
-const editProductERROR = (error) => {
+const editProductError = (error) => {
   return {
     type: UPDATE_PRODUCT_ERROR,
     payload: error,
@@ -160,7 +160,7 @@ export const editProduct = (updatedData) => {
     axios
       .put("/list", updatedData, headers)
       .then(() => dispatch(editProductSuccess()))
-      .catch((error) => dispatch(editProductERROR(error.response.data)));
+      .catch((error) => dispatch(editProductError(error.response.data)));
   };
 };
 

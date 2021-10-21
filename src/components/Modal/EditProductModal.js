@@ -2,27 +2,27 @@ import React, { useState, useEffect } from "react";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import { FaTimesCircle } from "react-icons/fa";
+import { IoMdCloseCircle } from "react-icons/io";
 import { Success, LoadingGif } from "../../assets";
 import "react-notifications/lib/notifications.css";
 import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
-import { IoMdCloseCircle } from "react-icons/io";
-import { InputField } from "..";
 import { connect } from "react-redux";
+import { InputField } from "..";
 import {
-  createProduct,
-  getSize,
-  getListProduct,
+  editProduct,
   getArea,
+  getListProduct,
+  getSize,
   requestError,
 } from "../../redux/actions";
-import { v4 as uuid } from "uuid";
 
-const CreateProductModal = ({
-  openCreateModal,
-  setOpenCreateModal,
+const EditProductModal = ({
+  openEditModal,
+  setOpenEditModal,
+  dataSelected,
   isRequestSuccess,
   error,
   listArea,
@@ -30,28 +30,49 @@ const CreateProductModal = ({
   isLoadingComponent,
   isLoadingButton,
   getListProduct,
-  createProduct,
-  getSize,
+  editProduct,
   getArea,
+  getSize,
   requestError,
 }) => {
-  const [newData, setNewData] = useState([]);
+  const [editedData, setEditedData] = useState([
+    {
+      uuid: "",
+      komoditas: "",
+      area_provinsi: "",
+      area_kota: "",
+      size: "",
+      price: "",
+      tgl_parsed: "",
+      timestamp: "",
+    },
+  ]);
+  const [submitData] = useState({
+    condition: {
+      uuid: "",
+    },
+    set: {},
+  });
 
   useEffect(() => {
-    listArea.length === 0 && getSize();
-    listSize.length === 0 && getArea();
+    listArea.length === 0 && getArea();
+    listSize.length === 0 && getSize();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
+    setEditedData(dataSelected);
+  }, [dataSelected]);
+
+  useEffect(() => {
     return (error !== null || isRequestSuccess !== null) && requestError();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [openCreateModal]);
+  }, [openEditModal]);
 
   const handleChange = (e) => {
-    const inputedData = { ...newData };
+    const inputedData = { ...editedData };
     inputedData[e.target.name] = e.target.value;
-    setNewData(inputedData);
+    setEditedData(inputedData);
   };
 
   const errorNotif = () => {
@@ -64,18 +85,18 @@ const CreateProductModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    newData.uuid = uuid();
-    newData.tgl_parsed = new Date().toISOString();
-    newData.timestamp = new Date().getTime();
-    if (newData.area) {
-      newData.area_province = newData.area.split(" - ")[0];
-      newData.area_kota = newData.area.split(" - ")[1];
+    editedData.tgl_parsed = new Date().toISOString();
+    editedData.timestamp = new Date().getTime();
+    submitData.condition.uuid = dataSelected.uuid;
+    if (submitData.set.area) {
+      submitData.set.area_provinsi = submitData.set.area.split(" - ")[0];
+      submitData.set.area_kota = submitData.set.area.split(" - ")[1];
     }
+    submitData.set = editedData;
+    const { komoditas, area_kota, area_provinsi, size, price } = submitData.set;
 
-    const { komoditas, area_kota, area_province, size, price } = newData;
-
-    if (komoditas && area_kota && area_province && size && price) {
-      createProduct([newData]);
+    if (komoditas && area_kota && area_provinsi && size && price) {
+      editProduct(submitData);
     } else {
       errorNotif();
     }
@@ -83,19 +104,12 @@ const CreateProductModal = ({
 
   const closeModal = () => {
     (error !== null || isRequestSuccess) && getListProduct();
-    const resetData = {
-      komoditas: null,
-      area: null,
-      size: null,
-      price: null,
-    };
-    setNewData(resetData);
-    setOpenCreateModal(false);
+    setOpenEditModal(false);
+    setEditedData(dataSelected);
   };
-
   return (
     <Modal
-      open={openCreateModal}
+      open={openEditModal}
       onClose={closeModal}
       center
       showCloseIcon={false}
@@ -103,7 +117,7 @@ const CreateProductModal = ({
       <NotificationContainer />
       <div className="modal container-modal">
         <div className="modal-title container-modal-title">
-          <div className="title-text">Tambah Produk Baru</div>
+          <div className="title-text">Rubah Data Produk</div>
           <button onClick={closeModal} className="close-modal">
             <IoMdCloseCircle size={24} />
           </button>
@@ -121,35 +135,44 @@ const CreateProductModal = ({
           ) : error !== null ? (
             <div className="text-wrapper">
               <FaTimesCircle size={48} />
-              <p>Ada Kesalahan!</p>
+              <p>Terjadi Kesalahan!</p>
             </div>
           ) : (
-            <div className="form">
+            <form>
               <InputField
-                label="Komoditas*"
+                label="Komoditas"
                 type="text"
-                placeholder="ex: Ikan Mujair"
+                placeholder="Masukan Komoditas"
                 name="komoditas"
                 onChange={handleChange}
+                value={editedData.komoditas}
               />
               <div className="select-option">
-                <label htmlFor="area">Area*</label>
+                <label htmlFor="area">Area</label>
                 <select id="area" name="area" onChange={handleChange}>
-                  <option defaultChecked value="">
-                    {isLoadingComponent ? "Memuat..." : "Pilih Area"}
+                  <option
+                    defaultChecked
+                    value={
+                      editedData.area_provinsi + " - " + editedData.area_kota
+                    }
+                  >
+                    {isLoadingComponent
+                      ? "Memuat..."
+                      : editedData.area_provinsi + " - " + editedData.area_kota}
                   </option>
                   {listArea.map((area) => (
                     <option>
+                      {" "}
                       {area.province} - {area.city}
                     </option>
                   ))}
                 </select>
               </div>
               <div className="select-option">
-                <label htmlFor="size">Ukuran*</label>
+                <label htmlFor="size">Ukuran</label>
                 <select id="size" name="size" onChange={handleChange}>
-                  <option defaultChecked value="">
-                    {isLoadingComponent ? "Memuat..." : "Pilih Ukuran"}
+                  <option defaultChecked value={editedData.size}>
+                    {isLoadingComponent ? "Memuat..." : editedData.size}
                   </option>
                   {listSize.map((item) => (
                     <option>{item.size}</option>
@@ -157,11 +180,12 @@ const CreateProductModal = ({
                 </select>
               </div>
               <InputField
-                label="Harga dalam Rupiah*"
+                label="Harga dalam Rupiah"
                 type="number"
-                placeholder="ex: 120000"
+                placeholder="Masukan Harga"
                 name="price"
                 onChange={handleChange}
+                value={editedData.price}
               />
               <div className="btn-group">
                 <button
@@ -172,11 +196,11 @@ const CreateProductModal = ({
                   {isLoadingButton ? (
                     <img src={LoadingGif} alt="Loading..." className="load" />
                   ) : (
-                    "Simpan"
+                    "Edit"
                   )}
                 </button>
               </div>
-            </div>
+            </form>
           )}
         </div>
       </div>
@@ -190,7 +214,6 @@ const mapStateToProps = (state) => {
     error: state.error,
     listArea: state.listArea,
     listSize: state.listSize,
-    cities: state.cities,
     isLoadingComponent: state.isLoadingComponent,
     isLoadingButton: state.isLoadingButton,
   };
@@ -198,12 +221,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createProduct: (newData) => dispatch(createProduct(newData)),
+    editProduct: (newData) => dispatch(editProduct(newData)),
     getListProduct: () => dispatch(getListProduct()),
-    getSize: () => dispatch(getSize()),
     getArea: () => dispatch(getArea()),
+    getSize: () => dispatch(getSize()),
     requestError: () => dispatch(requestError()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateProductModal);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProductModal);

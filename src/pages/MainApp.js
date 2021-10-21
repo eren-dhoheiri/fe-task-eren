@@ -14,14 +14,20 @@ import {
   DataShow,
   FilterTable,
   CreateProductModal,
+  EditProductModal,
+  DeleteProductModal,
 } from "../components";
 import { convertToIdr, formatDate } from "../utils/helper";
+import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { connect } from "react-redux";
 import { getListProduct } from "../redux/actions";
 
 const MainApp = ({ isLoading, listProduct, getListProduct }) => {
   const [dataList, setDataList] = useState([]);
   const [openCreateModal, setOpenCreateModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [dataSelected, setDataSelected] = useState({});
 
   useEffect(() => {
     getListProduct();
@@ -32,6 +38,16 @@ const MainApp = ({ isLoading, listProduct, getListProduct }) => {
     listProduct !== undefined &&
       setDataList(listProduct.filter((item) => item.komoditas !== null));
   }, [listProduct]);
+
+  const openEditProductModal = (item) => {
+    setDataSelected(item);
+    setOpenEditModal(true);
+  };
+
+  const openDeleteProductModal = (item) => {
+    setDataSelected(item);
+    setOpenDeleteModal(true);
+  };
 
   const data = useMemo(() => dataList, [dataList]);
   const columns = useMemo(
@@ -72,6 +88,30 @@ const MainApp = ({ isLoading, listProduct, getListProduct }) => {
       {
         Header: "Tanggal",
         accessor: (d) => formatDate(d.tgl_parsed),
+        Filter: FilterTable,
+        disableFilters: true,
+      },
+      {
+        Header: " ",
+        accessor: (item) => (
+          <div className="row-btn">
+            <button
+              className="edit-btn"
+              title={`Edit "${item.komoditas}" Info`}
+              onClick={() => openEditProductModal(item)}
+            >
+              <AiFillEdit />
+            </button>
+            <button
+              className="delete-btn"
+              title={`Hapus "${item.komoditas}"`}
+              onClick={() => openDeleteProductModal(item)}
+            >
+              <AiFillDelete />
+            </button>
+          </div>
+        ),
+        disableSortBy: true,
         Filter: FilterTable,
         disableFilters: true,
       },
@@ -154,6 +194,16 @@ const MainApp = ({ isLoading, listProduct, getListProduct }) => {
       <CreateProductModal
         openCreateModal={openCreateModal}
         setOpenCreateModal={setOpenCreateModal}
+      />
+      <DeleteProductModal
+        openDeleteModal={openDeleteModal}
+        setOpenDeleteModal={setOpenDeleteModal}
+        dataSelected={dataSelected}
+      />
+      <EditProductModal
+        openEditModal={openEditModal}
+        setOpenEditModal={setOpenEditModal}
+        dataSelected={dataSelected}
       />
     </div>
   );

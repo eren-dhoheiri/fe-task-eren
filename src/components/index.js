@@ -8,6 +8,8 @@ import DataShow from "./Common/DataShow";
 import Loading from "./Common/Loading";
 import InputField from "./Common/InputField";
 import CreateProductModal from "./Modal/CreateProductModal";
+import EditProductModal from "./Modal/EditProductModal";
+import DeleteProductModal from "./Modal/DeleteProductModal";
 
 export {
   Navbar,
@@ -20,4 +22,6 @@ export {
   FilterTable,
   InputField,
   CreateProductModal,
+  EditProductModal,
+  DeleteProductModal,
 };
