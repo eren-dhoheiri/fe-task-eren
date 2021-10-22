@@ -1,0 +1,38 @@
+.main {
+  flex: 1;
+  margin: 30px auto 60px;
+
+  .title-container {
+    display: flex;
+    justify-content: center;
+    h2 {
+      font-size: 28px;
+    }
+  }
+
+  .searchbar-container {
+    margin-bottom: 20px;
+
+    .searchbar {
+      display: flex;
+      justify-content: center;
+      background-color: #ffffff;
+      border-radius: 5px;
+      padding: 10px 15px;
+      box-shadow: $shadow;
+      width: 50%;
+      margin: 10px auto 30px;
+      -webkit-box-shadow: $shadow;
+      -moz-box-shadow: $shadow;
+
+      .searchbar-input {
+        border: none;
+        font-size: 17px;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}

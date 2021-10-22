@@ -1,0 +1,126 @@
+body {
+  margin: 0;
+  font-family: "Asap", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $font-color;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+header {
+  background-color: $main-color;
+  color: #ffffff;
+}
+
+footer {
+  background-color: $main-color;
+  color: #ffffff;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+
+  button {
+    border: none;
+    border-radius: 7px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  a {
+    color: #ffffff;
+  }
+}
+
+button {
+  border: 1.5px solid #ffffff;
+  border-radius: 7px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  height: 17px;
+  box-sizing: border-box;
+
+  &:disabled {
+    color: #bbbbbb !important;
+    cursor: not-allowed;
+
+    &:hover {
+      color: #bbbbbb !important;
+    }
+  }
+
+  &:hover {
+    background-color: #fafafa;
+    color: $font-color;
+    border: 1px solid $main-color;
+  }
+}
+
+.App {
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.row-btn {
+  display: flex;
+  align-items: center;
+
+  button {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    height: auto;
+    color: $font-color;
+  }
+
+  .edit-btn {
+    background-color: $yellow-color;
+    margin-right: 3px;
+  }
+
+  .delete-btn {
+    background-color: $red-color;
+    margin-right: 5px;
+  }
+}
+
+.logo {
+  height: 10vh;
+  display: flex;
+  margin: auto;
+}
+
+.input-option,
+.select-option {
+  text-align: left;
+  margin: 7px 0;
+
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  input,
+  select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 7px;
+    border-radius: 5px;
+    border: 1px solid $main-color;
+  }
+}

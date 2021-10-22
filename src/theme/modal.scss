@@ -1,0 +1,103 @@
+.react-responsive-modal-modal {
+  border-radius: 5px;
+  padding: 0 !important;
+  min-width: 40%;
+
+  .container-modal {
+    height: 100%;
+  }
+
+  .modal-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    font-weight: 600;
+    color: #ffffff;
+    height: 42px;
+
+    .close-modal {
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        background-color: transparent !important;
+        border: none !important;
+      }
+    }
+  }
+
+  .delete-modal-title {
+    background-color: #41a191;
+  }
+
+  .container-modal-title {
+    background-color: $main-color;
+  }
+
+  .modal-body {
+    text-align: center;
+    padding: 15px;
+    height: 80%;
+
+    .text-wrapper {
+      margin-bottom: 20px;
+      overflow-wrap: break-word;
+      .success-notif {
+        width: 28vw;
+        p {
+          color: $main-color;
+        }
+      }
+      .delete-notif {
+        font-size: 18px;
+        font-weight: 500;
+        padding: 30px 15px;
+      }
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: 15px;
+
+      .load {
+        width: 20px;
+      }
+
+      button {
+        width: 200px;
+        height: 100%;
+      }
+
+      .cancel-delete-btn {
+        background-color: #8dd2bd;
+      }
+
+      .confirm-delete-btn {
+        background-color: $red-color;
+      }
+
+      .cancel-edit-btn {
+        background-color: transparent;
+        color: $yellow-color;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .confirm-edit-btn {
+        background-color: $main-color;
+      }
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

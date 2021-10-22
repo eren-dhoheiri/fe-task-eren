@@ -1,6 +1,6 @@
 import { Footer, Navbar } from "./components";
 import { MainApp } from "./pages";
-import "./index.scss";
+import "./theme/index.scss";
 
 function App() {
   return (
