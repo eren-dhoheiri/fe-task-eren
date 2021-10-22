@@ -5,7 +5,11 @@ const Footer = () => {
     <footer>
       <div className="container">
         Made by Coffee, Find me at{" "}
-        <a href="https://www.linkedin.com/in/erendhoheiri/" target="_blank">
+        <a
+          href="https://www.linkedin.com/in/erendhoheiri/"
+          target="_blank"
+          rel="noreferrer"
+        >
           @Eren Dhoheiri
         </a>
       </div>
