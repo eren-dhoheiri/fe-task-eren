@@ -116,7 +116,7 @@ const CreateProductModal = ({
                 src={Success}
                 alt="success_add_data"
               />
-              <p>Selamat Produk Anda Berhasil Dirubah!</p>
+              <p>Selamat Produk Anda Berhasil Ditambahkan!</p>
             </div>
           ) : error !== null ? (
             <div className="text-wrapper">

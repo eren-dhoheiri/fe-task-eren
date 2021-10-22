@@ -117,7 +117,7 @@ const EditProductModal = ({
       <NotificationContainer />
       <div className="modal container-modal">
         <div className="modal-title container-modal-title">
-          <div className="title-text">Rubah Data Produk</div>
+          <div className="title-text">Ubah Data Produk</div>
           <button onClick={closeModal} className="close-modal">
             <IoMdCloseCircle size={24} />
           </button>
@@ -130,7 +130,7 @@ const EditProductModal = ({
                 src={Success}
                 alt="success_add_data"
               />
-              <p>Selamat Produk Anda Berhasil Dirubah!</p>
+              <p>Selamat Produk Anda Berhasil DiUbah!</p>
             </div>
           ) : error !== null ? (
             <div className="text-wrapper">
