@@ -28,6 +28,6 @@ and the app will opened on your default browser.
    - User can filter the list by column.
 
 2. Action items:
-   - User can record a new product to database through the form.
-   - User can record a edit product to database through the form.
-   - User can record a delete product to database through the form.
+   - User can add new product to database through the form.
+   - User can edit product to database through the form.
+   - User can delete product to database through the form.
